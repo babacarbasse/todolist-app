@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="content">
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Content</label>
+        <textarea
+          class="form-control"
+          name="exampleInputPassword1"
+          id=""
+          cols="30"
+          rows="10"
+        ></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="content">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Content</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="this.todoService.todoState.loaded">
+          <tr *ngFor="let todo of this.todoService.todoState.data">
+            <td>
+              <button
+                [routerLink]="['/', todo._id]"
+                routerLinkActive="router-link-active"
+                class="btn btn-info btn-sm"
+              >
+                Voir détail
+              </button>
+            </td>
+            <td>{{ todo.title }}</td>
+            <td>{{ todo.content }}</td>
+          </tr>
+        </ng-container>
+        <ng-container *ngIf="this.todoService.todoState.loading">
+          <p class="alert alert-danger">En cours de chargement</p>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
